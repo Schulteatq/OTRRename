@@ -430,19 +430,19 @@ namespace OTRRename
 			renamedFilename = Regex.Replace(renamedFilename, @"<Duration>", duration.ToString());
 
 			if (isHQ)
-				renamedFilename = Regex.Replace(renamedFilename, @"\<HQ\?(?<yes>.*):(?<no>[^>]*?)?\>", "${yes}");
+				renamedFilename = Regex.Replace(renamedFilename, @"\<HQ\?(?<yes>[^:]*):(?<no>[^>]*?)?\>", "${yes}");
 			else
-				renamedFilename = Regex.Replace(renamedFilename, @"\<HQ\?(?<yes>.*):(?<no>[^>]*?)?\>", "${no}");
+				renamedFilename = Regex.Replace(renamedFilename, @"\<HQ\?(?<yes>[^:]*):(?<no>[^>]*?)?\>", "${no}");
 
 			if (isHD)
-				renamedFilename = Regex.Replace(renamedFilename, @"\<HD\?(?<yes>.*):(?<no>[^>]*?)\>", "${yes}");
+				renamedFilename = Regex.Replace(renamedFilename, @"\<HD\?(?<yes>[^:]*):(?<no>[^>]*?)\>", "${yes}");
 			else
-				renamedFilename = Regex.Replace(renamedFilename, @"\<HD\?(?<yes>.*):(?<no>[^>]*?)\>", "${no}");
+				renamedFilename = Regex.Replace(renamedFilename, @"\<HD\?(?<yes>[^:]*):(?<no>[^>]*?)\>", "${no}");
 
 			if (isTopTipp)
-				renamedFilename = Regex.Replace(renamedFilename, @"\<TopTipp\?(?<yes>.*):(?<no>.*)\>", "${yes}");
+				renamedFilename = Regex.Replace(renamedFilename, @"\<TopTipp\?(?<yes>[^:]*):(?<no>[^>]*?)\>", "${yes}");
 			else
-				renamedFilename = Regex.Replace(renamedFilename, @"\<TopTipp\?(?<yes>.*):(?<no>.*)\>", "${no}");
+				renamedFilename = Regex.Replace(renamedFilename, @"\<TopTipp\?(?<yes>[^:]*):(?<no>[^>]*?)\>", "${no}");
 
 			renamedFilename = Regex.Replace(renamedFilename, @"<Add1>", additionalData1);
 			renamedFilename = Regex.Replace(renamedFilename, @"<Add2>", additionalData2);

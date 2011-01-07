@@ -387,10 +387,9 @@ namespace OTRRename
 			// 
 			// label5
 			// 
-			this.label5.AutoSize = true;
 			this.label5.Location = new System.Drawing.Point(6, 42);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(305, 156);
+			this.label5.Size = new System.Drawing.Size(326, 161);
 			this.label5.TabIndex = 1;
 			this.label5.Text = resources.GetString("label5.Text");
 			// 
@@ -570,7 +569,6 @@ namespace OTRRename
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.durationSpinEdit)).EndInit();
 			this.groupBox2.ResumeLayout(false);
-			this.groupBox2.PerformLayout();
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
 			this.panel1.ResumeLayout(false);
