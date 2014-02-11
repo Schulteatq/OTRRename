@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -52,7 +53,7 @@ namespace OTRRename
 		/// <summary>
 		/// 
 		/// </summary>
-		private string appDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\OTRRename";
+		private string appDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"OTRRename");
 
 		public Form1()
 			{
@@ -68,7 +69,7 @@ namespace OTRRename
 
 			if (saveGlobalCheckBox.Checked)
 				{
-				ReadIntoGlobalJobs(appDir + @"\OTRRenameMetadata.xml");
+				ReadIntoGlobalJobs(Path.Combine(appDir,"OTRRenameMetadata.xml"));
 				}
 
 			}
@@ -162,9 +163,13 @@ namespace OTRRename
 			bool allFilesOK = true;
 
 			jobs.Clear();
+            ArrayList alFiles = new ArrayList();
+            foreach (string ext in new string[] {"avi","flv","mp4","mpg"}){
+                string[] fs = Directory.GetFiles(dir, @"*." + ext);
+                alFiles.AddRange(fs);
+            }
 
-			string[] files = Directory.GetFiles(dir, @"*.avi");
-			foreach (string f in files)
+			foreach (string f in alFiles.ToArray())
 				{
 				FileInfo fi = new FileInfo(f);
 				RenameJob rj = new RenameJob(dir, fi.Name);
@@ -187,6 +192,7 @@ namespace OTRRename
 						{
 						rj.originalOTRFilename = rj.currentFilename;
 						rj.title = fi.Name.Substring(0, fi.Name.Length - 4);
+                        rj.extension = Path.GetExtension(fi.Name);
 						allFilesOK = false;
 						}
 					}
@@ -218,7 +224,7 @@ namespace OTRRename
 			{
 			if (dirTextBox.Text != "")
 				{
-				ReadIntoGlobalJobs(dirTextBox.Text + @"\OTRRenameMetadata.xml");
+				ReadIntoGlobalJobs(Path.Combine(dirTextBox.Text,"OTRRenameMetadata.xml"));
 				ReadDir(dirTextBox.Text);
 				SaveProgramSettings();
 				}
@@ -345,11 +351,11 @@ namespace OTRRename
 
 			if (saveGlobalCheckBox.Checked)
 				{
-				SaveMetadata(appDir + @"\OTRRenameMetadata.xml", true);
+				SaveMetadata(Path.Combine(appDir,"OTRRenameMetadata.xml"), true);
 				}
 			if (saveLocalCheckBox.Checked)
 				{
-				SaveMetadata(dirTextBox.Text + @"\OTRRenameMetadata.xml", false);
+				SaveMetadata(Path.Combine(dirTextBox.Text,"OTRRenameMetadata.xml"), false);
 				}
 			}
 
@@ -515,7 +521,7 @@ namespace OTRRename
 			{
 			if (doUpdateSettings)
 				{
-				XmlWriter xw = XmlWriter.Create(appDir + @"\" + "OTRRenameSettings.xml");
+				XmlWriter xw = XmlWriter.Create(Path.Combine(appDir,"OTRRenameSettings.xml"));
 
 				// leeren XmlSerializerNamespaces Namespace erstellen
 				XmlSerializerNamespaces xsn = new XmlSerializerNamespaces();
@@ -567,11 +573,13 @@ namespace OTRRename
 			int XmlVersion = 1;
 
 			// XML Datei lesen, falls vorhanden
-			if (File.Exists(appDir + @"\OTRRenameSettings.xml"))
-				{
+            string settingsFile = Path.Combine(appDir,"OTRRenameSettings.xml");
+			if (File.Exists(settingsFile))
+            {
+                Console.Error.WriteLine(settingsFile);
 				// Dokument laden
 				XmlDocument doc = new XmlDocument();
-				doc.Load(appDir + @"\OTRRenameSettings.xml");
+				doc.Load(settingsFile);
 
 				XmlNode mainNode = doc.SelectSingleNode("//OTRRenameSettings");
 				XmlVersion = Int32.Parse(mainNode.Attributes.GetNamedItem("version").Value);
@@ -614,7 +622,7 @@ namespace OTRRename
 			{
 			if (saveGlobalCheckBox.Checked)
 				{
-				ReadIntoGlobalJobs(appDir + @"\OTRRenameMetadata.xml");
+				ReadIntoGlobalJobs(Path.Combine(appDir,"OTRRenameMetadata.xml"));
 				}
 			SaveProgramSettings();
 			}
@@ -631,7 +639,7 @@ namespace OTRRename
 
 		private void dirTextBox_TextChanged(object sender, EventArgs e)
 			{
-			while (dirTextBox.Text.Substring(dirTextBox.Text.Length-1) == @"\")
+			while (dirTextBox.Text.EndsWith(@"\") || dirTextBox.Text.EndsWith(@"/"))
 				{
 				dirTextBox.Text = dirTextBox.Text.Substring(0, dirTextBox.Text.Length - 1);
 				}

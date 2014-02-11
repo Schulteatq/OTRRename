@@ -38,7 +38,7 @@ namespace OTRRename
 		/// <summary>
 		/// Umbenennungsschema
 		/// </summary>
-		private static string m_renameScheme = @"<Title><HQ? [HQ]:>.avi";
+		private static string m_renameScheme = @"<Title><HQ? [HQ]:>.<ext>";
 		/// <summary>
 		/// Umbenennungsschema
 		/// </summary>
@@ -163,18 +163,31 @@ namespace OTRRename
 
 		#region Metadaten
 
-		/// <summary>
-		/// Filmtitel
-		/// </summary>
-		private string m_title = String.Empty;
-		/// <summary>
-		/// Filmtitel
-		/// </summary>
-		public string title
-			{
-			get { return m_title; }
-			set { m_title = value; }
-			}
+        /// <summary>
+        /// Filmtitel
+        /// </summary>
+        private string m_title = String.Empty;
+        /// <summary>
+        /// Filmtitel
+        /// </summary>
+        public string title
+            {
+            get { return m_title; }
+            set { m_title = value; }
+            }
+
+        /// <summary>
+        /// Filmtitel
+        /// </summary>
+        private string m_extension = String.Empty;
+        /// <summary>
+        /// Filmtitel
+        /// </summary>
+        public string extension
+            {
+            get { return m_extension; }
+            set { m_extension = value; }
+            }
 
 		/// <summary>
 		/// Datum und Zeit des Films
@@ -306,7 +319,7 @@ namespace OTRRename
 			this.path = path;
 			this.currentFilename = currentFilename;
 
-			FileInfo fi = new FileInfo(path + @"\" + currentFilename);
+			FileInfo fi = new FileInfo(Path.Combine(path,currentFilename));
 			this.filesize = fi.Length;
 			}
 
@@ -367,6 +380,8 @@ namespace OTRRename
 
 			// Titel trimmen
 			title = title.Trim();
+            // Remove int prefix 
+            title = Regex.Replace(title, @"^\d{5} ", String.Empty);
 
 			if (i+1 < separated.Length)
 				{
@@ -381,6 +396,7 @@ namespace OTRRename
 				isHD = Regex.IsMatch(separated[separated.Length - 1], @"mpg\.HD\.");
 				}
 
+            extension = Path.GetExtension(oldName);
 
 			// doppelt gemoppelt: CreateNachher();
 			}
@@ -404,8 +420,8 @@ namespace OTRRename
 		public void CreateNachher()
 			{
 			renamedFilename = renameScheme;
-
-			renamedFilename = Regex.Replace(renamedFilename, @"<Title>", title);
+            renamedFilename = Regex.Replace(renamedFilename, @"<Title>", title);
+            renamedFilename = Regex.Replace(renamedFilename, @".<ext>", extension);
 
 			renamedFilename = Regex.Replace(renamedFilename, @"<YY>", date.ToString("yy"));
 			renamedFilename = Regex.Replace(renamedFilename, @"<YYYY>", date.ToString("yyyy"));
@@ -458,7 +474,7 @@ namespace OTRRename
 			{
 			try
 				{
-				File.Move(path + @"\" + currentFilename, path + @"\" + renamedFilename);
+				File.Move(Path.Combine(path,currentFilename), Path.Combine(path,renamedFilename));
 				currentFilename = renamedFilename;
 				}
 			catch (Exception ex)
@@ -474,7 +490,7 @@ namespace OTRRename
 			{
 			try
 				{
-				File.Move(path + @"\" + currentFilename, path + @"\" + originalOTRFilename);
+				File.Move(Path.Combine(path,currentFilename), Path.Combine(path,originalOTRFilename));
 				currentFilename = originalOTRFilename;
 				}
 			catch (Exception ex)

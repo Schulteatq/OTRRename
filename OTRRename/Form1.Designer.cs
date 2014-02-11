@@ -372,7 +372,7 @@ namespace OTRRename
 			this.renameSchemeComboBox.Name = "renameSchemeComboBox";
 			this.renameSchemeComboBox.Size = new System.Drawing.Size(326, 21);
 			this.renameSchemeComboBox.TabIndex = 10;
-			this.renameSchemeComboBox.Text = "<Title><HQ? [HQ]:>.avi";
+			this.renameSchemeComboBox.Text = "<Title><HQ? [HQ]:>.<ext>";
 			this.renameSchemeComboBox.Leave += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
 			// 
 			// renameFilesButton
