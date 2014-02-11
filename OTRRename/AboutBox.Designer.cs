@@ -118,7 +118,7 @@ namespace OTRRename
 			this.labelVersion.Name = "labelVersion";
 			this.labelVersion.Size = new System.Drawing.Size(349, 17);
 			this.labelVersion.TabIndex = 0;
-			this.labelVersion.Text = "Version 0.9.5";
+			this.labelVersion.Text = "Version 0.9.6";
 			this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// labelCopyright
@@ -130,7 +130,7 @@ namespace OTRRename
 			this.labelCopyright.Name = "labelCopyright";
 			this.labelCopyright.Size = new System.Drawing.Size(349, 17);
 			this.labelCopyright.TabIndex = 21;
-			this.labelCopyright.Text = "Copyright 2009, Christian Schulte zu Berge";
+			this.labelCopyright.Text = "Copyright 2009-2014, Christian Schulte zu Berge";
 			this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// labelCompanyName
