@@ -134,6 +134,11 @@ namespace OTRRename
 							// und Deserializen
 							RenameJob rj = xs.Deserialize(tr) as RenameJob;
 
+							if (rj.extension == "")
+								{
+								rj.extension = Path.GetExtension(rj.originalOTRFilename);
+								}
+
 							// ab in die Liste
 							if (!globalJobs.ContainsKey(rj.GetHashCode()))
 								{
