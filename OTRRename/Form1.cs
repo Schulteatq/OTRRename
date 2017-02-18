@@ -375,7 +375,7 @@ namespace OTRRename
 			{
 			// TODO: feststellen, ob Vorgang erfolgreich und demnach true/false zurückgeben
 
-			XmlWriter xw = XmlWriter.Create(filename);
+			XmlWriter xw = XmlWriter.Create(filename, new System.Xml.XmlWriterSettings());
 
 			try
 				{
@@ -526,7 +526,7 @@ namespace OTRRename
 			{
 			if (doUpdateSettings)
 				{
-				XmlWriter xw = XmlWriter.Create(Path.Combine(appDir,"OTRRenameSettings.xml"));
+				XmlWriter xw = XmlWriter.Create(Path.Combine(appDir,"OTRRenameSettings.xml"), new System.Xml.XmlWriterSettings());
 
 				// leeren XmlSerializerNamespaces Namespace erstellen
 				XmlSerializerNamespaces xsn = new XmlSerializerNamespaces();

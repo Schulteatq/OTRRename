@@ -435,6 +435,7 @@ namespace OTRRename
 
 			//nachher = Regex.Replace(nachher, @"<H>", date.ToString("h"));
 			//renamedFilename = Regex.Replace(renamedFilename, @"<h>", date.ToString("h"));
+			renamedFilename = Regex.Replace(renamedFilename, @"<HH>", date.ToString("HH"));
 			renamedFilename = Regex.Replace(renamedFilename, @"<hh>", date.ToString("hh"));
 			renamedFilename = Regex.Replace(renamedFilename, @"<m>", date.ToString("m"));
 			renamedFilename = Regex.Replace(renamedFilename, @"<mm>", date.ToString("mm"));

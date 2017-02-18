@@ -123,7 +123,7 @@
 &lt;YY&gt;, &lt;YYYY&gt; - Jahr (kurz, lang)
 &lt;M&gt;, &lt;MM&gt;, &lt;MMM&gt; - Monat
 &lt;D&gt;, &lt;DD&gt;, &lt;DDD&gt; - Tag
-&lt;hh&gt;, &lt;m&gt;, &lt;mm&gt;, &lt;s&gt;, &lt;ss&gt;  - Stunde, Minute, Sekunde
+&lt;hh&gt;, &lt;HH&gt;, &lt;m&gt;, &lt;mm&gt;, &lt;s&gt;, &lt;ss&gt;  - Stunde, Minute, Sekunde
 &lt;Channel&gt; - Sendername
 &lt;Duration&gt; - Dauer
 &lt;HQ?Text1:Text2&gt; - Text1 falls HQ, Text2 falls kein HQ
